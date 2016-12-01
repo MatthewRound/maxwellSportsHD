@@ -8,29 +8,38 @@
 		<title>Overlay</title>
 	</head>
 	<body data-ng-app="app">
-		<h1>Test</h1>
 		<div ng-controller="overlay">
-			<div class="eventScoreBoard">
-				<p class="eventTitle">
-					<span class="ultimate">ULTIMATE</span>
-					<span class="eventName" ng-bind="event.name.toUpperCase()"></span>
-				</p>
-				<table class="scoreBoard">
-					<tr>
-						<td></td>
-						<td>W</td>
-						<td>L</td>
-						<td>P</td>
-						<td>%</td>
-					</tr>
-					<tr ng-repeat="(key, card) in event.scores">
-						<td ng-bind="card.name"></td>
-						<td ng-bind="card.wins"></td>
-						<td ng-bind="card.loses"></td>
-						<td ng-bind="card.played"></td>
-						<td ng-bind="caculateWinPercentate(card)"></td>
-					</tr>
-				</table>
+			<div class="rightSide">
+				<div class="eventScoreBoard">
+					<div class="maxwellSports"><span class="maxwell">Maxwell</span><span class="sports">Sports</span></div>
+					<div class="dateContainer">
+						<span class="time">{{date| date:'hh:mm'}}</span>
+						<span class="hemiDay">{{date| date:'a'}}</span>
+						<span class="date">{{date| date:'MMM dd'}}</span>
+					</div>
+				</div>
+				<div class="eventScoreBoard" ng-repeat="event in events">
+					<p class="eventTitle">
+						<span class="ultimate">ULTIMATE</span>
+						<span class="eventName" ng-bind="event.name.toUpperCase()"></span>
+					</p>
+					<table class="scoreBoard">
+						<tr>
+							<td></td>
+							<td>W</td>
+							<td>L</td>
+							<td>P</td>
+							<td>%</td>
+						</tr>
+						<tr ng-repeat="(key, card) in event.scores | orderBy : '-wins'">
+							<td ng-bind="card.name"></td>
+							<td ng-bind="card.wins"></td>
+							<td ng-bind="card.loses"></td>
+							<td ng-bind="card.played"></td>
+							<td ng-bind="caculateWinPercentate(card)"></td>
+						</tr>
+					</table>
+				</div>
 			</div>
 		</div>
 	</body>

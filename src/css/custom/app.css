@@ -1,0 +1,44 @@
+/*  */
+body
+{
+	background-color:red;
+	color:white;
+	font-weight:900;
+	text-transform: uppercase;
+}
+
+.eventScoreBoard
+{
+	border:2px solid black;
+	border-radius:10px;
+	background-color:rgba(0, 0, 255, 0.5);
+	width:200px;
+}
+
+.eventTitle
+{
+	width:100%;
+    text-align: center;
+}
+
+.ultimate
+{
+	font-weight:900;
+	background:blue;
+	border: 1px solid darkblue;
+	padding:2px 10px 2px 10px;
+}
+
+.eventName
+{
+	font-weight:1900;
+	background:blue;
+	border: 1px solid darkblue;
+	padding:2px;
+}
+
+.scoreBoard
+{
+	width:100%;
+}
+

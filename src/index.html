@@ -8,7 +8,7 @@
 		<title>Overlay</title>
 	</head>
 	<body data-ng-app="app">
-		<div ng-controller="overlay">
+		<div ng-controller="overlay" ng-init="init()">
 			<div class="rightSide">
 				<div class="eventScoreBoard">
 					<div class="maxwellSports"><span class="maxwell">Maxwell</span><span class="sports">Sports</span></div>
@@ -18,10 +18,10 @@
 						<span class="date">{{date| date:'MMM dd'}}</span>
 					</div>
 				</div>
-				<div class="eventScoreBoard" ng-repeat="event in events">
+				<div class="eventScoreBoard">
 					<p class="eventTitle">
 						<span class="ultimate">ULTIMATE</span>
-						<span class="eventName" ng-bind="event.name.toUpperCase()"></span>
+						<span class="eventName" ng-bind="currentEvent.name.toUpperCase()"></span>
 					</p>
 					<table class="scoreBoard">
 						<tr>
@@ -31,7 +31,7 @@
 							<td>P</td>
 							<td>%</td>
 						</tr>
-						<tr ng-repeat="(key, card) in event.scores | orderBy : '-wins'">
+						<tr ng-repeat="(key, card) in currentEvent.scores | orderBy : '-wins'">
 							<td ng-bind="card.name"></td>
 							<td ng-bind="card.wins"></td>
 							<td ng-bind="card.loses"></td>
@@ -40,11 +40,18 @@
 						</tr>
 					</table>
 				</div>
+				<div class="eventScoreBoard">
+					<span class="profileName" ng-bind="currentPlayer.name"></span>
+					<span class="profileEvent" ng-bind="currentEvent.name"></span>
+					<img class="profileImage" ng-src="{{currentPlayer.image}}" />
+					<span class="profileStats" ng-bind="caculateWinPercentate(currentPlayer)"></span>
+				</div>
 			</div>
 		</div>
 	</body>
 	<script src="/js/lib/jquery.min.js" type="text/javascript"></script>
 	<script src="/js/lib/angular.min.js" type="text/javascript"></script>
+	<script src="/js/custom/events.js" type="text/javascript"></script>
 	<script src="/js/custom/app.js" type="text/javascript"></script>
 	<link href="/css/custom/app.css" rel="stylesheet">
 </html>

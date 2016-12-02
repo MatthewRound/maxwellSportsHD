@@ -1,138 +1,29 @@
 var app = angular.module('app', []);
 
-app.controller('overlay', ['$scope', '$http', function($scope, $http) {
-/* 	TODO get this dynamically updated */
-	$scope.events = [
-		{
-			name : 'darts',
-			scores : [
-				{
-					'name': 'matt', 
-					'wins': 10, 
-					'loses': 1,
-					'played': 11,
-				},
-				{
-					'name': 'bobby', 
-					'wins': 11, 
-					'loses': 12,
-					'played': 23,
-				},
-				{
-					'name': 'chris', 
-					'wins': 12, 
-					'loses': 12,
-					'played': 23,
-				},
-				{
-					'name': 'tom', 
-					'wins': 1, 
-					'loses': 12,
-					'played': 23,
-				},
-				{
-					'name': 'al', 
-					'wins': 1, 
-					'loses': 12,
-					'played': 23,
-				},
-				{
-					'name': 'other', 
-					'wins': 2, 
-					'loses': 12,
-					'played': 23,
-				}
-			]
-		},
-		{
-			name : 'pool',
-			scores : [
-				{
-					'name': 'matt', 
-					'wins': 10, 
-					'loses': 1,
-					'played': 11,
-				},
-				{
-					'name': 'bobby', 
-					'wins': 11, 
-					'loses': 12,
-					'played': 23,
-				},
-				{
-					'name': 'chris', 
-					'wins': 12, 
-					'loses': 12,
-					'played': 23,
-				},
-				{
-					'name': 'tom', 
-					'wins': 1, 
-					'loses': 12,
-					'played': 23,
-				},
-				{
-					'name': 'al', 
-					'wins': 1, 
-					'loses': 12,
-					'played': 23,
-				},
-				{
-					'name': 'other', 
-					'wins': 2, 
-					'loses': 12,
-					'played': 23,
-				}
-			]
-		},
-		{
-			name : 't-ten',
-			scores : [
-				{
-					'name': 'matt', 
-					'wins': 10, 
-					'loses': 1,
-					'played': 11,
-				},
-				{
-					'name': 'bobby', 
-					'wins': 11, 
-					'loses': 12,
-					'played': 23,
-				},
-				{
-					'name': 'chris', 
-					'wins': 12, 
-					'loses': 12,
-					'played': 23,
-				},
-				{
-					'name': 'tom', 
-					'wins': 1, 
-					'loses': 12,
-					'played': 23,
-				},
-				{
-					'name': 'al', 
-					'wins': 1, 
-					'loses': 12,
-					'played': 23,
-				},
-				{
-					'name': 'other', 
-					'wins': 2, 
-					'loses': 12,
-					'played': 23,
-				}
-			]
-		},
-	];
-
+app.controller('overlay', ['$scope', '$http', '$interval', function($scope, $http, $interval) {
 
 	$scope.caculateWinPercentate = function(scoreCard) {
 		return (Math.round((scoreCard.wins / scoreCard.played) * 100) /100)*100;
-	}
+	};
 
-	$scope.date = new Date();
+	$scope.randomiseEvent = function()
+	{
+		var eventIndex = Math.floor(Math.random() * (events.length - 0 )) + 0;
+		$scope.currentEvent = $scope.events[eventIndex];
+		var playerIndex = Math.floor(Math.random() * ($scope.currentEvent.scores.length - 0 )) + 0;
+		$scope.currentPlayer = $scope.currentEvent.scores[playerIndex];
+	};
+
+	$scope.update = function()
+	{
+		$scope.date = new Date();
+		$scope.randomiseEvent();
+	};
+
+	$scope.init = function() {
+		$scope.events = events;
+		$scope.update();
+		$interval(function(){$scope.update()}, 1000);
+	}
 
 }]);

@@ -9,9 +9,10 @@
 	</head>
 	<body data-ng-app="app">
 		<div ng-controller="overlay" ng-init="init()">
+
 			<div class="rightSide">
 				<div class="eventScoreBoard">
-					<div class="maxwellSports"><span class="maxwell">Maxwell</span><span class="sports">Sports</span></div>
+					<div class="maxwellSports"><span class="maxwell">Maxwell</span><span class="sports">Sports HD</span></div>
 					<div class="dateContainer">
 						<span class="time">{{date| date:'hh:mm'}}</span>
 						<span class="hemiDay">{{date| date:'a'}}</span>
@@ -47,6 +48,13 @@
 					<span class="profileStats" ng-bind="caculateWinPercentate(currentPlayer)"></span>
 				</div>
 			</div>
+
+			<div class="bottom">
+				<ul class="eventsList">
+					<li ng-repeat="event in events">{{event.name}}</li>
+				</ul>
+			</div>
+
 		</div>
 	</body>
 	<script src="/js/lib/jquery.min.js" type="text/javascript"></script>

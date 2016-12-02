@@ -85,3 +85,11 @@ body
 {
 	width:100%;
 }
+
+.bottom
+{
+    width: 100%;
+    bottom: 0;
+	background: linear-gradient(to bottom, white 0%, grey 50%,grey 51%,white 100%);
+    position: absolute;
+}

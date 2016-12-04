@@ -1,8 +1,10 @@
 var app = angular.module('app', []);
 
-app.controller('overlay', ['$scope', '$http', '$interval', function($scope, $http, $interval) {
+app.controller('overlay', ['$scope', '$http', '$interval', function($scope, $http, $interval) 
+{
 
-	$scope.caculateWinPercentate = function(scoreCard) {
+	$scope.caculateWinPercentage = function(scoreCard) 
+	{
 		return (Math.round((scoreCard.wins / scoreCard.played) * 100) /100)*100;
 	};
 

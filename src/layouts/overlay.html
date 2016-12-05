@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-        <meta charset="utf-8">                                                                                             
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">                                                              
+        <meta charset="utf-8">                              
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-		<link href="/css/lib/Montserrat.css" rel="stylesheet">
-		<title>Overlay</title>
+		<title>Maxwell Sports HD</title>
 	</head>
 	<body data-ng-app="app">
 		<div data-ng-controller="overlay" data-ng-init="init()">
 			<div class="rightSide">
 				<div class="eventScoreBoard">
-					<div class="maxwellSports"><span class="maxwell">Maxwell</span><span class="sports">Sports HD</span></div>
+					<div class="maxwellSports"><span class="maxwell"><a href="/admin">Maxwell</a></span><span class="sports">Sports HD</span></div>
 					<div class="dateContainer">
 						<span class="time">{{date| date:'hh:mm'}}</span>
 						<span class="hemiDay">{{date| date:'a'}}</span>
@@ -31,12 +30,12 @@
 							<td>P</td>
 							<td>%</td>
 						</tr>
-						<tr data-ng-repeat="(key, card) in currentEvent.scores | orderBy : '-wins'">
-							<td data-ng-bind="card.name"></td>
-							<td data-ng-bind="card.wins"></td>
-							<td data-ng-bind="card.loses"></td>
-							<td data-ng-bind="card.played"></td>
-							<td data-ng-bind="caculateWinPercentate(card)"></td>
+						<tr data-ng-repeat="(key, player) in currentEvent.scores | orderBy : '-wins'">
+							<td data-ng-bind="player.name"></td>
+							<td data-ng-bind="player.wins"></td>
+							<td data-ng-bind="player.loses"></td>
+							<td data-ng-bind="player.played"></td>
+							<td data-ng-bind="caculateWinPercentage(player)"></td>
 						</tr>
 					</table>
 				</div>
@@ -54,9 +53,6 @@
 			</div>
 		</div>
 	</body>
-	<script src="/js/lib/jquery.min.js" type="text/javascript"></script>
-	<script src="/js/lib/angular.min.js" type="text/javascript"></script>
-	<script src="/js/custom/events.js" type="text/javascript"></script>
-	<script src="/js/custom/app.js" type="text/javascript"></script>
-	<link href="/css/custom/app.css" rel="stylesheet">
+	<script src="/js/all.js" type="text/javascript"></script>
+	<link href="/css/all.css" rel="stylesheet">
 </html>

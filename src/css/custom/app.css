@@ -93,3 +93,19 @@ body
 	background: linear-gradient(to bottom, white 0%, grey 50%,grey 51%,white 100%);
     position: absolute;
 }
+
+.players
+{
+	border: 1px solid black;
+	width: 49%;
+	float: left;
+	padding-bottom: 20px;
+}
+
+.event
+{
+	border: 1px solid black;
+	width: 50%;
+	float: left;
+	margin-bottom: 2%;
+}

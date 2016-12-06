@@ -15,6 +15,18 @@ var cssfiles = []string{"lib/Montserrat.css", "custom/app.css"}
 var jsfiles = []string{"lib/jquery.min.js", "lib/angular.min.js", "custom/app.js", "custom/events.js"}
 
 
+func hydrateHandler(w http.ResponseWriter, r *http.Request) {
+	var file = "./js/custom/events.js"
+	root, err := ioutil.ReadFile(file)
+	if err != nil {
+		fmt.Println(err)
+		return 
+	}
+	w.Header().Set("Content-Type", "application/javascript")
+	fmt.Fprintf(w, "%s", string(root))
+}
+
+
 func cssHandler(w http.ResponseWriter, r *http.Request) {
 	for i:= 0; i< len(cssfiles); i++ {
 		var file = "./css/" + cssfiles[i]
@@ -94,6 +106,7 @@ func adminHandler(w http.ResponseWriter, r *http.Request) {
 func main() {
 	http.HandleFunc("/", handler)
 	http.HandleFunc("/admin", adminHandler)
+	http.HandleFunc("/hydrate", hydrateHandler)
 	http.HandleFunc("/js/all.js", jsHandler)
 	http.HandleFunc("/css/all.css", cssHandler)
 	http.HandleFunc("/images/", imageHandler)

@@ -8,6 +8,14 @@
 	</head>
 	<body data-ng-app="app">
 		<div data-ng-controller="admin" data-ng-init="init()">
+			<div class="players">
+				<ul>
+					<li data-ng-repeat="player in players">
+						<h2 data-ng-bind="player.name"></h2>
+						<input type="text" data-ng-bind="player.image" data-ng-model="player.image"></input>
+					</li>
+				</ul>
+			</div>
 			<button class="button" type="button" data-ng-click="save()">save</button>
 			<span data-ng-show="ok">ok <a href="/">back</a></span>
 			<div class="event" data-ng-repeat="(key, event) in events">

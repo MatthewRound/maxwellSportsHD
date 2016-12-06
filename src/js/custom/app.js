@@ -22,10 +22,24 @@ app.controller('overlay', ['$scope', '$http', '$interval', function($scope, $htt
 		$scope.randomiseEvent();
 	};
 
-	$scope.init = function() {
+	$scope.hydrate = function()
+	{
+		var ep = "/hydrate";
+		$http.get(ep, [])
+			.success(function(data, status, headers, config) {
+				eval(data);
+				$scope.events  = events;
+			})
+			.error(function(data, status, headers, config) {
+			});
+	};
+
+	$scope.init = function() 
+	{
 		$scope.events = events;
 		$scope.update();
 		$interval(function(){$scope.update()}, 2000);
+		$interval(function(){$scope.hydrate()}, 7000);
 	}
 
 }]);
@@ -33,14 +47,31 @@ app.controller('overlay', ['$scope', '$http', '$interval', function($scope, $htt
 
 app.controller('admin', ['$scope', '$http', function($scope, $http) 
 {
-	$scope.init = function() {
+	$scope.init = function() 
+	{
 		$scope.events = events;
+		$scope.players = $scope.getPlayers();
 	}
 
 	$scope.ok = false;
 
-	$scope.save = function() {
+	$scope.mergePlayers = function() 
+	{
+		angular.forEach($scope.events, function(eventValue, eventKey){
+			angular.forEach(eventValue.scores, function(player, scoresKey){
+				angular.forEach($scope.players, function(splayer, sscoresKey){
+					if (player.name == splayer.name) {
+						player.image = splayer.image;
+					}
+				});
+			});
+		});
+	}
+
+	$scope.save = function() 
+	{
 		var ep = "/admin";
+		$scope.mergePlayers();
 		$http.post(ep, $scope.events)
 			.success(function(data, status, headers, config) {
 				$scope.ok = true;
@@ -48,6 +79,17 @@ app.controller('admin', ['$scope', '$http', function($scope, $http)
 			.error(function(data, status, headers, config) {
 				$scope.ok = false;
 			});
+	}
+
+	$scope.getPlayers = function() 
+	{
+		var players = {};
+		angular.forEach($scope.events, function(eventValue, eventKey){
+			angular.forEach(eventValue.scores, function(player, scoresKey){
+				players[player.name] = player;
+			});
+		});
+		return players;
 	}
 
 }]);

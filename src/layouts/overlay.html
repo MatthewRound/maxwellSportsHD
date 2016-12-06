@@ -8,6 +8,68 @@
 	</head>
 	<body data-ng-app="app">
 		<div data-ng-controller="overlay" data-ng-init="init()">
+			<div class="row">
+				<div class="col-xs-9">
+				</div>
+				<div class="col-xs-3">
+					<div class="sidebar">
+						<div class="logo">
+							<span class="maxwell">
+								<a href="/admin">Maxwell</a>
+							</span>
+							<span class="sports">
+								Sports HD
+							</span>
+							<br clear="all" />
+						</div>
+
+						<h2 class="time">6:23 <span>am</span> Aug 23</h2>
+
+
+						<div class="panel panel-sports">
+							<div class="panel-title">
+								Ultimate <span class="event" data-ng-bind="currentEvent.name.toUpperCase()"></span>
+							</div>
+							<div class="panel-body">
+								<table class="table table-bordered table-condensed text-center">
+									<thead>
+										<tr>
+											<th></th>
+											<th>W</th>
+											<th>L</th>
+											<th>P</th>
+											<th>%</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr data-ng-repeat="(key, player) in currentEvent.scores | orderBy : '-wins'">
+											<td data-ng-bind="player.name"></td>
+											<td data-ng-bind="player.wins"></td>
+											<td data-ng-bind="player.loses"></td>
+											<td data-ng-bind="player.played"></td>
+											<td data-ng-bind="caculateWinPercentage(player)"></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+
+
+						<div class="panel panel-sports">
+							<div class="panel-title">												
+								<span data-ng-bind="currentPlayer.name"></span> - <span class="win__percentage" data-ng-bind="caculateWinPercentage(currentPlayer)"></span>% <span class="event" data-ng-bind="currentEvent.name"></span>
+							</div>
+							<div class="panel-body">
+								<img alt="image" data-ng-src="{{currentPlayer.image}}" />
+								
+							</div>
+						</div>
+
+
+					</div>
+				</div>
+			</div>
+			<!-- 
 			<div class="rightSide">
 				<div class="eventScoreBoard">
 					<div class="maxwellSports"><span class="maxwell"><a href="/admin">Maxwell</a></span><span class="sports">Sports HD</span></div>
@@ -20,7 +82,7 @@
 				<div class="eventScoreBoard">
 					<p class="eventTitle">
 						<span class="ultimate">ULTIMATE</span>
-						<span class="eventName" data-ng-bind="currentEvent.name.toUpperCase()"></span>
+						
 					</p>
 					<table class="scoreBoard">
 						<tr>
@@ -40,12 +102,11 @@
 					</table>
 				</div>
 				<div class="eventScoreBoard">
-					<span class="profileName" data-ng-bind="currentPlayer.name"></span>
-					<span class="profileEvent" data-ng-bind="currentEvent.name"></span>
+
 					<img class="profileImage" alt="image" data-ng-src="{{currentPlayer.image}}" />
-					<span class="profileStats" data-ng-bind="caculateWinPercentage(currentPlayer)"></span>
+					
 				</div>
-			</div>
+			</div> -->
 			<div class="bottom">
 				<ul class="eventsList">
 					<li data-ng-repeat="event in events">{{event.name}}</li>

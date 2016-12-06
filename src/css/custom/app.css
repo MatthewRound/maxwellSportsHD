@@ -4,108 +4,106 @@
  * @scriptName   css/custom/app.css
  ***************************************/
 
-body
-{
-	background: linear-gradient(to bottom, #fceabb 0%,#fccd4d 50%,#f8b500 51%,#fbdf93 100%);
+body {
+	background-image: url('https://i.ytimg.com/vi/px4anRUEVdc/maxresdefault.jpg');
+	background-repeat: no-repeat;
+	background-position: 0 -100px;
 	color:white;
-	font-weight:900;
+	font-weight: 900;
 	text-transform: uppercase;
+	font-family: 'Montserrat', sans-serif;	
 }
-
-.eventScoreBoard
-{
-	border:2px solid black;
-	border-radius:10px;
-	background-color:rgba(0, 0, 255, 0.5);
-	width:200px;
+.sidebar {
+	height: 80vh;
+	margin: 20px 80px 0;
 }
-
-.eventScoreBoard:first-child
-{
-	height:60px;
-	padding-top:50px;
-	text-align: center;
+.sidebar .logo {
+	margin-bottom: 20px;
 }
-
-.eventTitle
-{
-	width:100%;
-	text-align: center;
-}
-
-.ultimate
-{
-	font-weight:900;
-	background:blue;
-	border: 1px solid darkblue;
-	padding:2px 10px 2px 10px;
-}
-
-.eventName
-{
-	font-weight:1900;
-	background:blue;
-	border: 1px solid darkblue;
-	padding:5px 10px 5px 10px;
-}
-
-.scoreBoard
-{
-	width:100%;
-}
-
-.rightSide
-{
-	right: 0;
-	float: right;
-	margin-right: 10%;
-	margin-top: -50px;
-}
-.maxwell
-{
-	background:blue;
-	padding:4px 2px 4px 10px;
-}
-.sports
-{
-	background:red;
-	padding:4px 10px 4px 2px;
-}
-.maxwellSports
-{
-	margin-bottom:10px;
-}
-
-.profileImage
-{
-	width:90%;
-}
-
-.profileStats
-{
-	width:100%;
-}
-
-.bottom
-{
-    width: 100%;
-    bottom: 0;
-	background: linear-gradient(to bottom, white 0%, grey 50%,grey 51%,white 100%);
-    position: absolute;
-}
-
-.players
-{
-	border: 1px solid black;
-	width: 49%;
-	float: left;
-	padding-bottom: 20px;
-}
-
-.event
-{
-	border: 1px solid black;
+.sidebar .logo span {
+	display: inline-block;
+	padding: 10px 0px;
+	float: left;	
+	font-size: 1.2em;
 	width: 50%;
-	float: left;
-	margin-bottom: 2%;
+	text-align: center;
+}
+.sidebar .logo .maxwell {
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+	box-shadow: inset 0px 0px 53px -13px rgba(0,0,0,0.75);		
+	background: -webkit-linear-gradient(top,  #7181a4 0%,#122d68 100%);
+}
+.sidebar .logo .sports {
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;	
+	box-shadow: inset 0px 0px 53px -13px rgba(0,0,0,0.75);		
+	background: -webkit-linear-gradient(top,  #dc7780 1%,#c41c2b 100%);
+}
+.sidebar .logo .maxwell a {
+	color: white;
+	margin: 0;
+}
+
+
+.time {
+	font-size: 1.8em;
+	text-align: center;
+	font-weight: bold;
+}
+.time span {
+	font-size: 1.5rem;
+}
+
+/**
+ * panels
+ */
+.panel.panel-sports {
+	border-radius: 10px;
+	opacity: 0.9;
+	box-shadow: inset 0px 0px 53px -13px rgba(0,0,0,0.75);			
+	background: -webkit-linear-gradient(top,  #7181a4 0%,#122d68 100%);
+	border: 3px solid #2D346A;
+	text-align: center;
+	min-height: 300px;
+	margin-bottom: 0;
+}
+.panel.panel-sports .panel-title {
+	padding: 15px 15px 0px;
+	font-size: 1.5em; 
+}
+.panel.panel-sports .panel-title span.event {
+	padding: 5px 10px;
+	font-weight: 100;
+	background: -webkit-linear-gradient(top,  #dc7780 1%,#c41c2b 100%);	
+}
+.panel.panel-sports .panel-body {
+	position: relative;
+}
+.panel.panel-sports .panel-body img {
+	max-width: 80%;
+}
+
+.panel.panel-sports .panel-body .win__percentage {
+	position: absolute;
+	top: 0;
+	font-size: 8em;
+	color: #c41c2b;
+	text-align: center;
+}
+
+table.table.text-center tbody tr td, table.table.text-center thead tr th {
+	text-align: center;
+}
+
+.bottom {
+	padding: 10px;
+	box-shadow: inset 0px 0px 53px -13px rgba(0,0,0,0.75);			
+	background: -webkit-linear-gradient(top,  #7181a4 0%,#122d68 100%);
+	border-top: 3px solid #2D346A;	
+	border-bottom: 3px solid #2D346A;	
+    width: 100%;
+    bottom: 10px;
+    opacity: 0.8;
+    position: absolute;
 }

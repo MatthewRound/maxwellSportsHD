@@ -23,9 +23,7 @@
 							<br clear="all" />
 						</div>
 
-						<h2 class="time">6:23 <span>am</span> Aug 23</h2>
-
-
+						<h2 class="time">{{date| date:'hh:mm'}} <span>{{date| date:'a'}}</span> {{date| date:'MMM d'}}</h2>
 						<div class="panel panel-sports">
 							<div class="panel-title">
 								Ultimate <span class="event" data-ng-bind="currentEvent.name.toUpperCase()"></span>
@@ -53,60 +51,17 @@
 								</table>
 							</div>
 						</div>
-
-
 						<div class="panel panel-sports">
 							<div class="panel-title">												
 								<span data-ng-bind="currentPlayer.name"></span> - <span class="win__percentage" data-ng-bind="caculateWinPercentage(currentPlayer)"></span>% <span class="event" data-ng-bind="currentEvent.name"></span>
 							</div>
 							<div class="panel-body">
 								<img alt="image" data-ng-src="{{currentPlayer.image}}" />
-								
 							</div>
 						</div>
-
-
 					</div>
 				</div>
 			</div>
-			<!-- 
-			<div class="rightSide">
-				<div class="eventScoreBoard">
-					<div class="maxwellSports"><span class="maxwell"><a href="/admin">Maxwell</a></span><span class="sports">Sports HD</span></div>
-					<div class="dateContainer">
-						<span class="time">{{date| date:'hh:mm'}}</span>
-						<span class="hemiDay">{{date| date:'a'}}</span>
-						<span class="date">{{date| date:'MMM dd'}}</span>
-					</div>
-				</div>
-				<div class="eventScoreBoard">
-					<p class="eventTitle">
-						<span class="ultimate">ULTIMATE</span>
-						
-					</p>
-					<table class="scoreBoard">
-						<tr>
-							<td></td>
-							<td>W</td>
-							<td>L</td>
-							<td>P</td>
-							<td>%</td>
-						</tr>
-						<tr data-ng-repeat="(key, player) in currentEvent.scores | orderBy : '-wins'">
-							<td data-ng-bind="player.name"></td>
-							<td data-ng-bind="player.wins"></td>
-							<td data-ng-bind="player.loses"></td>
-							<td data-ng-bind="player.played"></td>
-							<td data-ng-bind="caculateWinPercentage(player)"></td>
-						</tr>
-					</table>
-				</div>
-				<div class="eventScoreBoard">
-
-					<img class="profileImage" alt="image" data-ng-src="{{currentPlayer.image}}" />
-					
-				</div>
-			</div> -->
 			<div class="bottom">
 				<ul class="eventsList">
 					<li data-ng-repeat="event in events">{{event.name}}</li>

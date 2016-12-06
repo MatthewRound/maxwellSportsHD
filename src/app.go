@@ -11,7 +11,7 @@ import (
 )
 
 
-var cssfiles = []string{"lib/Montserrat.css", "custom/app.css"}
+var cssfiles = []string{"lib/bootstrap.min.css", "lib/Montserrat.css", "custom/app.css"}
 var jsfiles = []string{"lib/jquery.min.js", "lib/angular.min.js", "custom/app.js", "custom/events.js"}
 
 

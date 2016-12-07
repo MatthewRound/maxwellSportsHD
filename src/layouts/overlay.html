@@ -50,6 +50,13 @@
 				<ul class="eventsList">
 					<li data-ng-repeat="event in events">{{event.name}}</li>
 				</ul>
+				<div class="news">
+					<h1>PREMIER NEWS</h1>
+					<span>Tottenham ensured they qualified for the Europa League with a comfortable 3-1 Champions League win over CSKA Moscow at Wembley.</span>
+				</div>
+				<ul class="vsList">
+					<li data-ng-repeat="matchup in vsList">{{matchup.champ.name}} vs {{matchup.contender.name}}</li>
+				</ul>
 			</div>
 		</div>
 	</body>

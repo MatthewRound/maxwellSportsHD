@@ -12,7 +12,12 @@
 				<ul>
 					<li data-ng-repeat="player in players">
 						<h2 data-ng-bind="player.name"></h2>
+						<label>image</label>
 						<input type="text" data-ng-bind="player.image" data-ng-model="player.image"></input>
+						<label>country name</label>
+						<input type="text" data-ng-bind="player.country.name" data-ng-model="player.country.name"></input>
+						<label>country image</label>
+						<input type="text" data-ng-bind="player.country.image" data-ng-model="player.country.image"></input>
 					</li>
 				</ul>
 			</div>

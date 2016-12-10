@@ -16,6 +16,7 @@
 						<span class="hemiDay">{{date| date:'a'}}</span>
 						<span class="date">{{date| date:'MMM dd'}}</span>
 					</div>
+					<span class="updating" ng-data-hide="updating == 0" data-ng-show="updating == 1">*</span>
 				</div>
 				<div class="eventScoreBoard">
 					<p class="eventTitle">
@@ -35,14 +36,19 @@
 							<td data-ng-bind="player.wins"></td>
 							<td data-ng-bind="player.loses"></td>
 							<td data-ng-bind="player.played"></td>
-							<td data-ng-bind="caculateWinPercentage(player)"></td>
+							<td>{{calculateWinPercentage(player)}}</td>
 						</tr>
 					</table>
 				</div>
 				<div class="eventScoreBoard">
-					<span class="profileName" data-ng-bind="currentPlayer.name"></span>
-					<span class="profileEvent" data-ng-bind="currentEvent.name"></span>
-					<img class="profileImage" alt="image" data-ng-src="{{currentPlayer.image}}" />
+					<div class="playerCard">
+						<span class="profileName" data-ng-bind="currentPlayer.name"></span>
+						<img class="profileImage" alt="image" data-ng-src="{{currentPlayer.image}}" />
+						<div class="country">
+							<img alt="image" data-ng-src="{{currentPlayer.country.image}}" />
+						</div>
+						<span class="countryName" data-ng-bind="currentPlayer.country.name"></span>
+					</div>
 					<span class="profileStats" data-ng-bind="caculateWinPercentage(currentPlayer)"></span>
 				</div>
 			</div>
@@ -51,7 +57,7 @@
 					<li data-ng-repeat="event in events">{{event.name}}</li>
 				</ul>
 				<div class="news">
-					<h1>PREMIER NEWS</h1>
+					<h1>MAXWELL NEWS</h1>
 					<span>Tottenham ensured they qualified for the Europa League with a comfortable 3-1 Champions League win over CSKA Moscow at Wembley.</span>
 				</div>
 				<ul class="vsList">

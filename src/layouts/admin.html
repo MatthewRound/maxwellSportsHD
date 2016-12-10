@@ -8,39 +8,41 @@
 	</head>
 	<body data-ng-app="app">
 		<div data-ng-controller="admin" data-ng-init="init()">
-			<div class="players">
-				<ul>
-					<li data-ng-repeat="player in players">
-						<h2 data-ng-bind="player.name"></h2>
-						<label>image</label>
-						<input type="text" data-ng-bind="player.image" data-ng-model="player.image"></input>
-						<label>country name</label>
-						<input type="text" data-ng-bind="player.country.name" data-ng-model="player.country.name"></input>
-						<label>country image</label>
-						<input type="text" data-ng-bind="player.country.image" data-ng-model="player.country.image"></input>
-					</li>
-				</ul>
-			</div>
-			<button class="button" type="button" data-ng-click="save()">save</button>
+			<table class="playerInfo">
+				<tr>
+					<td>Player</td>
+					<td>image</td>
+					<td>country flag</td>
+					<td>country name</td>
+				</tr>
+				<tr data-ng-repeat="player in players">
+					<td data-ng-bind="player.name"></td>
+					<td><input type="text" data-ng-bind="player.image" data-ng-model="player.image"></input></td>
+					<td><input type="text" data-ng-bind="player.country.name" data-ng-model="player.country.name"></input></td>
+					<td><input type="text" data-ng-bind="player.country.image" data-ng-model="player.country.image"></input></td>
+				</tr>
+			</table>
+			<button class="saveButton" type="button" data-ng-click="save()">save</button>
 			<span data-ng-show="ok">ok <a href="/">back</a></span>
-			<div class="event" data-ng-repeat="(key, event) in events">
-				<h1 class="eventName" data-ng-bind="event.name"></h1>
-				<div class="players" data-ng-repeat="player in event.scores"> 
-					<h2>{{player.name}}</h2>
-					<div class="form-group">
-						<label>Played</label>
-						<input type="number" data-ng-bind="player.played" data-ng-model="player.played"></input>
-					</div>
-					<div class="form-group">
-						<label>wins</label>
-						<input type="number" data-ng-bind="player.wins" data-ng-model="player.wins"></input>
-					</div>
-					<div class="form-group">
-						<label>loses</label>
-						<input type="number" data-ng-bind="player.loses" data-ng-model="player.loses"></input>
-					</div>
-				</div>
-			</div>
+			<table class="event" data-ng-repeat="(key, event) in events">
+				<tr>
+					<td colspan="100%">
+						<h1 class="eventName" data-ng-bind="event.name"></h1>
+					</td>
+					</tr>
+						<td></td>
+						<td>Played</td>
+						<td>Wins</td>
+						<td>Loses</td>
+					<tr>
+				</tr>
+				<tr data-ng-repeat="player in event.scores"> 
+					<td>{{player.name}}</td>
+					<td><input type="number" data-ng-bind="player.played" data-ng-model="player.played"></input></td>
+					<td><input type="number" data-ng-bind="player.wins" data-ng-model="player.wins"></input></td>
+					<td><input type="number" data-ng-bind="player.loses" data-ng-model="player.loses"></input></td>
+				</tr>
+			</table>
 		</div>
 	</body>
 	<script src="/js/all.js" type="text/javascript"></script>

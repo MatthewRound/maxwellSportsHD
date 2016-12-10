@@ -110,7 +110,7 @@ body
 .event
 {
 	border: 1px solid black;
-	width: 50%;
+	width: 100%;
 	float: left;
 	margin-bottom: 2%;
 }
@@ -204,4 +204,18 @@ body
 {
 	width:100px;
 	height:30px;
+}
+
+.playerInfo
+{
+	float:left;
+	width:50%;
+}
+
+.saveButton
+{
+	float:right;
+	width:50%;
+	height:100px;
+	font-size:600%;
 }

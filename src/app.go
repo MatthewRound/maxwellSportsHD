@@ -12,7 +12,7 @@ import (
 
 
 var cssfiles = []string{"lib/Montserrat.css", "custom/app.css"}
-var jsfiles = []string{"lib/jquery.min.js", "lib/angular.min.js", "custom/app.js", "custom/events.js"}
+var jsfiles = []string{"lib/jquery.min.js", "lib/angular.min.js", "custom/app.js", "custom/events.js", "custom/canvas.js"}
 
 
 func hydrateHandler(w http.ResponseWriter, r *http.Request) {

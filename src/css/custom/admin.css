@@ -1,0 +1,18 @@
+.adminNews
+{
+	width:100%;
+}
+
+.playerInfo
+{
+	float:left;
+	width:50%;
+}
+
+.saveButton
+{
+	float:right;
+	width:50%;
+	height:100px;
+	font-size:600%;
+}

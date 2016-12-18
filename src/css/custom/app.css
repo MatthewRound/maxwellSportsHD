@@ -206,20 +206,6 @@ body
 	height:30px;
 }
 
-.playerInfo
-{
-	float:left;
-	width:50%;
-}
-
-.saveButton
-{
-	float:right;
-	width:50%;
-	height:100px;
-	font-size:600%;
-}
-
 #canvas
 {
 	width: 1920px;
@@ -227,3 +213,4 @@ body
 	position: fixed;
 	z-index: -9999;
 }
+

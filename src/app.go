@@ -8,11 +8,12 @@ import (
 	"fmt"
 	"os"
 	"net/http"
+	"bytes"
+	"golang.org/x/net/websocket"
 )
 
 
-var cssfiles = []string{"lib/Montserrat.css", "custom/app.css"}
-var jsfiles = []string{"lib/jquery.min.js", "lib/angular.min.js", "custom/app.js", "custom/events.js", "custom/canvas.js"}
+var connections = []*websocket.Conn{}
 
 
 func hydrateHandler(w http.ResponseWriter, r *http.Request) {
@@ -28,6 +29,10 @@ func hydrateHandler(w http.ResponseWriter, r *http.Request) {
 
 
 func cssHandler(w http.ResponseWriter, r *http.Request) {
+	var cssfiles = []string{"lib/Montserrat.css", "custom/app.css"}
+	if r.FormValue("p") == "admin" {
+		cssfiles = append(cssfiles, "custom/admin.css")
+	}
 	for i:= 0; i< len(cssfiles); i++ {
 		var file = "./css/" + cssfiles[i]
 		root, err := ioutil.ReadFile(file)
@@ -51,6 +56,20 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 
 func jsHandler(w http.ResponseWriter, r *http.Request) {
+	var jsfiles = []string{"lib/jquery.min.js", "lib/angular.min.js", "custom/app.js", "custom/events.js"}
+	if r.FormValue("p") == "admin" {
+		jsfiles = append(jsfiles, "custom/service.player.js")
+		jsfiles = append(jsfiles, "custom/service.event.js")
+		jsfiles = append(jsfiles, "custom/service.news.js")
+		jsfiles = append(jsfiles, "custom/controller.admin.js")
+	}
+	if r.FormValue("p") == "overlay" {
+		jsfiles = append(jsfiles, "custom/pojo.maxwellLogo.js")
+		jsfiles = append(jsfiles, "custom/service.player.js")
+		jsfiles = append(jsfiles, "custom/service.event.js")
+		jsfiles = append(jsfiles, "custom/controller.overlay.js")
+		jsfiles = append(jsfiles, "custom/controller.news.js")
+	}
 	for i:= 0; i< len(jsfiles); i++ {
 		var file = "./js/" + jsfiles[i]
 		root, err := ioutil.ReadFile(file)
@@ -103,6 +122,34 @@ func adminHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 
+func echoHandler(ws *websocket.Conn) {
+	connections = append(connections, ws)
+	var err error
+	for {
+		var reply string
+		if err = websocket.Message.Receive(ws, &reply); err != nil {
+			fmt.Println("hmm")
+			break
+		}
+		msg :=  reply
+		if err = websocket.Message.Send(ws, msg); err != nil {
+			fmt.Println("Can't send")
+			break
+		}
+	}
+}
+
+
+func relay (w http.ResponseWriter, r *http.Request) {
+	buf:= new (bytes.Buffer)
+	buf.ReadFrom(r.Body)
+	body := buf.String()
+	for key := range connections{
+		connections[key].Write([]byte(body))
+	}
+}
+
+
 func main() {
 	http.HandleFunc("/", handler)
 	http.HandleFunc("/admin", adminHandler)
@@ -110,5 +157,7 @@ func main() {
 	http.HandleFunc("/js/all.js", jsHandler)
 	http.HandleFunc("/css/all.css", cssHandler)
 	http.HandleFunc("/images/", imageHandler)
+	http.HandleFunc("/relay", relay)
+	http.Handle("/ws", websocket.Handler(echoHandler))
 	http.ListenAndServe(":8080", nil)
 }

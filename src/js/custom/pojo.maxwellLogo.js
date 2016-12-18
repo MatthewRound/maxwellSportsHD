@@ -1,5 +1,5 @@
-
-var maxwellLogo = {
+var maxwellLogo = 
+{
 	pen:undefined,
 	canvasSize:{w:0, h:0},
 	x:undefined,
@@ -8,7 +8,8 @@ var maxwellLogo = {
 	xDirection:'right',
 	yDirection:'down',
 	increments: {x:1, y:1},
-	init:function() {
+	init:function() 
+	{
 		var c = document.getElementById("canvas");
 		c.style.border = "1px solid black";
 		this.pen = c.getContext("2d");
@@ -16,10 +17,12 @@ var maxwellLogo = {
 		this.canvasSize.h = c.height;
 		this.loop();
 	},
-	clear : function(){
+	clear : function()
+	{
 		maxwellLogo.pen.clearRect(0,0,maxwellLogo.canvasSize.w, maxwellLogo.canvasSize.h);
 	},
-	loop: function(){
+	loop: function()
+	{
 		this.x = 1;
 		this.y = 1;
 		setInterval(function(){
@@ -52,7 +55,8 @@ var maxwellLogo = {
 			
 		}, 50)
 	},
-	drawLogo:function(x, y) {
+	drawLogo:function(x, y) 
+	{
 		//draw background box blue
 		var width = (this.canvasSize.w / 10) *4;
 		var height = (this.canvasSize.h / 10) *1;
@@ -76,7 +80,4 @@ var maxwellLogo = {
 		this.currentBox.h = height;
 	}
 };
-
-
-
 maxwellLogo.init();

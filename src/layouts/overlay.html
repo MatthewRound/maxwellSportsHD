@@ -57,9 +57,9 @@
 				<ul class="eventsList">
 					<li data-ng-repeat="event in events">{{event.name}}</li>
 				</ul>
-				<div class="news">
+				<div id="news" class="news" data-ng-controller="news">
 					<h1>MAXWELL NEWS</h1>
-					<span>Tottenham ensured they qualified for the Europa League with a comfortable 3-1 Champions League win over CSKA Moscow at Wembley.</span>
+					<span data-ng-model="news" data-ng-bind="news"></span>
 				</div>
 				<ul class="vsList">
 					<li data-ng-repeat="matchup in vsList">{{matchup.champ.name}} vs {{matchup.contender.name}}</li>
@@ -67,6 +67,6 @@
 			</div>
 		</div>
 	</body>
-	<script src="/js/all.js" type="text/javascript"></script>
-	<link href="/css/all.css" rel="stylesheet">
+	<script src="/js/all.js?p=overlay" type="text/javascript"></script>
+	<link href="/css/all.css?p=overlay" rel="stylesheet">
 </html>

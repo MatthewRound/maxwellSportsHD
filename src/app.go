@@ -16,18 +16,6 @@ import (
 var connections = []*websocket.Conn{}
 
 
-func hydrateHandler(w http.ResponseWriter, r *http.Request) {
-	var file = "./js/custom/events.js"
-	root, err := ioutil.ReadFile(file)
-	if err != nil {
-		fmt.Println(err)
-		return 
-	}
-	w.Header().Set("Content-Type", "application/javascript")
-	fmt.Fprintf(w, "%s", string(root))
-}
-
-
 func cssHandler(w http.ResponseWriter, r *http.Request) {
 	var cssfiles = []string{"lib/Montserrat.css", "custom/app.css"}
 	if r.FormValue("p") == "admin" {
@@ -61,6 +49,7 @@ func jsHandler(w http.ResponseWriter, r *http.Request) {
 		jsfiles = append(jsfiles, "custom/service.player.js")
 		jsfiles = append(jsfiles, "custom/service.event.js")
 		jsfiles = append(jsfiles, "custom/service.news.js")
+		jsfiles = append(jsfiles, "custom/service.admin.js")
 		jsfiles = append(jsfiles, "custom/controller.admin.js")
 	}
 	if r.FormValue("p") == "overlay" {
@@ -97,7 +86,8 @@ func imageHandler(w http.ResponseWriter, r *http.Request) {
 func adminHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "POST" {
 		var scores interface{}
-		err := json.NewDecoder(r.Body).Decode(&scores)
+		st := r.Body
+		err := json.NewDecoder(st).Decode(&scores)
 		if err != nil {
 			fmt.Println(err)
 		} 
@@ -112,6 +102,12 @@ func adminHandler(w http.ResponseWriter, r *http.Request) {
 		wf.Flush()
 		f.Sync()
 		f.Close()
+		buf:= new (bytes.Buffer)
+		fmt.Fprintf(buf, "{\"events\" : ")
+		json.NewEncoder(buf).Encode(scores)
+		fmt.Fprintf(buf, "}")
+		body := buf.String()
+		sendToClients(body)
 	} else {
 		root, err := ioutil.ReadFile("./layouts/admin.html")
 		if err != nil {
@@ -139,21 +135,32 @@ func echoHandler(ws *websocket.Conn) {
 	}
 }
 
+func sendToClients(s string) {
+	for key := range connections{
+		_, err :=	connections[key].Write([]byte(s))
+		if err != nil {
+			fmt.Println("Can't send to ws")
+		}
+	}
+}
+
 
 func relay (w http.ResponseWriter, r *http.Request) {
 	buf:= new (bytes.Buffer)
 	buf.ReadFrom(r.Body)
 	body := buf.String()
-	for key := range connections{
-		connections[key].Write([]byte(body))
-	}
+	sendToClients(body)
 }
 
+
+func adminInfoHandler (w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "{\"clientCount\" : %d}", len(connections))
+}
 
 func main() {
 	http.HandleFunc("/", handler)
 	http.HandleFunc("/admin", adminHandler)
-	http.HandleFunc("/hydrate", hydrateHandler)
+	http.HandleFunc("/admin/info", adminInfoHandler)
 	http.HandleFunc("/js/all.js", jsHandler)
 	http.HandleFunc("/css/all.css", cssHandler)
 	http.HandleFunc("/images/", imageHandler)

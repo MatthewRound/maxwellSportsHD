@@ -1,6 +1,6 @@
 app.controller('overlay', ['$scope', '$http', '$interval', 'EventService', 'PlayerService', function($scope, $http, $interval, EventService, PlayerService) 
 {
-	$scope.updating = 0;
+	$scope.connected = 0;
 
 	$scope.calculateWinPercentage = function(player) 
 	{
@@ -14,31 +14,16 @@ app.controller('overlay', ['$scope', '$http', '$interval', 'EventService', 'Play
 		EventService.setupVsList($scope);
 	};
 
-	$scope.hydrate = function()
-	{
-		var ep = "/hydrate";
-		$scope.updating = 1;
-		$http.get(ep, [])
-			.success(function(data, status, headers, config) {
-				eval(data);
-				$scope.events  = events;
-				$scope.updating = 0;
-			})
-			.error(function(data, status, headers, config) {
-				$scope.updating = 0;
-			});
-	};
-
 	$scope.initSocket = function()
 	{
 		var wsuri = "ws://" + window.location.hostname + ":" + window.location.port+ "/ws";
 		var sock = new WebSocket(wsuri);
 		sock.onopen = function() {
-			console.log("connected");
+			$scope.connected = 1;
 			sock.send(JSON.stringify({message: "hello server"}))
 		}
 		sock.onclose = function(e) {
-			console.log("closed");
+			$scope.connected = 0;
 		}
 		sock.onerror = function(e) {
 			console.debug("error:"+e);
@@ -48,16 +33,18 @@ app.controller('overlay', ['$scope', '$http', '$interval', 'EventService', 'Play
 			if (data.news !== undefined) {
 				angular.element(document.getElementById('news')).scope().news = data.news;
 			}
+			if (data.events !== undefined) {
+				angular.element(document.getElementById('overlay')).scope().events = data.events;
+			}
 		}
 	};
 
 	$scope.init = function() 
 	{
 		$scope.events = events;
+		$scope.initSocket();
 		EventService.getPlayers($scope);
 		$scope.update();
 		$interval(function(){$scope.update()}, 2000);
-		$interval(function(){$scope.hydrate()}, 7000);
-		$scope.initSocket();
 	};
 }]);

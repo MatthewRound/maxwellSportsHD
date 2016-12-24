@@ -8,7 +8,12 @@
 	</head>
 	<body data-ng-app="app">
 		<div data-ng-controller="admin" data-ng-init="init()">
-			<input class="adminNews" data-ng-model="news" type="text"></input>
+			<div>
+				<input class="adminNews" data-ng-model="news" type="text"></input>
+				<button class="saveButton" type="button" data-ng-click="save()">save</button>
+				<p>Clients: <span data-ng-bind="clientCount"></span></p>
+				<span data-ng-show="ok">ok <a href="/">back</a></span>
+			</div>
 			<table class="playerInfo">
 				<tr>
 					<td>Player</td>
@@ -23,8 +28,6 @@
 					<td><input type="text" data-ng-bind="player.country.image" data-ng-model="player.country.image"></input></td>
 				</tr>
 			</table>
-			<button class="saveButton" type="button" data-ng-click="save()">save</button>
-			<span data-ng-show="ok">ok <a href="/">back</a></span>
 			<table class="event" data-ng-repeat="(key, event) in events">
 				<tr>
 					<td colspan="100%">

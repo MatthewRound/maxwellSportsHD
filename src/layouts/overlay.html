@@ -8,7 +8,7 @@
 	</head>
 	<body data-ng-app="app">
 		<canvas id="canvas" width="500px" height="500px"></canvas>
-		<div data-ng-controller="overlay" data-ng-init="init()">
+		<div id="overlay" data-ng-controller="overlay" data-ng-init="init()">
 			<div class="rightSide">
 				<div class="eventScoreBoard">
 					<div class="maxwellSports"><span class="maxwell"><a href="/admin">Maxwell</a></span><span class="sports">Sports HD</span></div>
@@ -17,7 +17,7 @@
 						<span class="hemiDay">{{date| date:'a'}}</span>
 						<span class="date">{{date| date:'MMM dd'}}</span>
 					</div>
-					<span class="updating" ng-data-hide="updating == 0" data-ng-show="updating == 1">*</span>
+					<span class="updating" ng-data-hide="connected == 0" data-ng-show="connected == 1">*</span>
 				</div>
 				<div class="eventScoreBoard">
 					<p class="eventTitle">

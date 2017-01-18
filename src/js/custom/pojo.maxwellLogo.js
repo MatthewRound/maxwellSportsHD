@@ -59,18 +59,16 @@ var maxwellLogo =
 	{
 		//draw background box blue
 		var width = (this.canvasSize.w / 10) *4;
-		var height = (this.canvasSize.h / 10) *1;
+		var width = 200;
+		var height = 55;
 		this.pen.moveTo(x, y);
 		this.pen.fillStyle="#0000ff";
 		this.pen.fillRect(x, y, width, height);
-		//todo fix this
 		this.pen.fillStyle="#ffffff";
 		this.pen.font="30px Verdana";
 		this.pen.fillText('MAXWELL', x+(width/10), y+(height /1.5));
-		var redx = x + width;// + (this.canvasSize.w / 10) *2;
-		var redy = y + height - (this.canvasSize.h / 10) *1;
-		width = (this.canvasSize.w / 10) *4;
-		height = (this.canvasSize.h / 10) *1;
+		var redx = x + width;
+		var redy = y;
 		this.pen.moveTo(redx, redy);
 		this.pen.fillStyle="#ff0000";
 		this.pen.fillRect(redx, redy, width, height);

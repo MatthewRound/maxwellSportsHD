@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+        <meta charset="utf-8">                              
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Maxwell Sports HD (addGame)</title>
+	</head>
+	<body data-ng-app="app">
+		<div data-ng-controller="addgame" data-ng-init="init()">
+			<div>
+				<p>Event:<span data-ng-bind="currentEvent.name"></span></p>
+				<p>Winner:<span data-ng-bind="winner.name"></span></p>
+				<ul>
+					<li ng-repeat="player in players" ng-show="player.participating">
+					<span ng-bind="player.name"></span>
+					<input name="winner" type="radio" ng-model="winner.name" ng-value="player.name" />
+					</li>
+				</ul>
+				<button class="saveButton" type="button" data-ng-click="save()">save</button>
+			</div>
+			<ul>
+				<li data-ng-repeat="player in players">
+					<input type="checkbox" ng-model="player.participating" />
+					<span data-ng-bind="player.name"><span></td>
+				</li>
+			</ul>
+			<ul>
+				<li class="event" data-ng-repeat="(key, event) in events">
+					<span ng-bind="event.name"></span>
+					<input name="event" type="radio" ng-model="currentEvent.name" ng-value="event.name" />
+				</li>
+			</ul>
+		</div>
+	</body>
+	<script src="/js/all.js?p=addgame" type="text/javascript"></script>
+	<link href="/css/all.css?p=admin" rel="stylesheet">
+</html>
+

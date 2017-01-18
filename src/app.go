@@ -52,6 +52,13 @@ func jsHandler(w http.ResponseWriter, r *http.Request) {
 		jsfiles = append(jsfiles, "custom/service.admin.js")
 		jsfiles = append(jsfiles, "custom/controller.admin.js")
 	}
+	if r.FormValue("p") == "addgame" {
+		jsfiles = append(jsfiles, "custom/service.player.js")
+		jsfiles = append(jsfiles, "custom/service.event.js")
+		jsfiles = append(jsfiles, "custom/service.news.js")
+		jsfiles = append(jsfiles, "custom/service.admin.js")
+		jsfiles = append(jsfiles, "custom/controller.addgame.js")
+	}
 	if r.FormValue("p") == "overlay" {
 		jsfiles = append(jsfiles, "custom/pojo.maxwellLogo.js")
 		jsfiles = append(jsfiles, "custom/service.player.js")
@@ -117,6 +124,17 @@ func adminHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func addgameHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method == "POST" {
+	} else {
+		root, err := ioutil.ReadFile("./layouts/addgame.html")
+		if err != nil {
+			return
+		}
+		fmt.Fprintf(w, "%s", string(root))
+	}
+}
+
 
 func echoHandler(ws *websocket.Conn) {
 	connections = append(connections, ws)
@@ -160,6 +178,7 @@ func adminInfoHandler (w http.ResponseWriter, r *http.Request) {
 func main() {
 	http.HandleFunc("/", handler)
 	http.HandleFunc("/admin", adminHandler)
+	http.HandleFunc("/admin/addgame", addgameHandler)
 	http.HandleFunc("/admin/info", adminInfoHandler)
 	http.HandleFunc("/js/all.js", jsHandler)
 	http.HandleFunc("/css/all.css", cssHandler)

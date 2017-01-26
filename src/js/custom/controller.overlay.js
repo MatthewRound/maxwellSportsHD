@@ -1,6 +1,8 @@
 app.controller('overlay', ['$scope', '$http', '$interval', 'EventService', 'PlayerService', function($scope, $http, $interval, EventService, PlayerService) 
 {
 	$scope.connected = 0;
+	$scope.currentIndex = 0;
+	$scope.hold = false;
 
 	$scope.calculateWinPercentage = function(player) 
 	{
@@ -10,7 +12,9 @@ app.controller('overlay', ['$scope', '$http', '$interval', 'EventService', 'Play
 	$scope.update = function()
 	{
 		$scope.date = new Date();
-		EventService.randomise($scope);
+		if (!$scope.hold) {
+			EventService.randomise($scope);
+		}
 		EventService.setupVsList($scope);
 	};
 
@@ -42,6 +46,7 @@ app.controller('overlay', ['$scope', '$http', '$interval', 'EventService', 'Play
 	$scope.init = function() 
 	{
 		$scope.events = events;
+		$scope.hold = false;
 		$scope.initSocket();
 		EventService.getPlayers($scope);
 		$scope.update();

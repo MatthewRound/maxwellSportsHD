@@ -5,6 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Maxwell Sports HD</title>
+		<link href="/css/all.css?p=overlay" rel="stylesheet">
 	</head>
 	<body data-ng-app="app">
 		<canvas id="canvas" width="1920px" height="1080px"></canvas>
@@ -40,6 +41,11 @@
 							<td>{{calculateWinPercentage(player)}}</td>
 						</tr>
 					</table>
+					<div class="controls">
+						<button ng-click="hold=true" ng-show="!hold">Hold</button>
+						<button ng-click="hold=false" ng-show="hold == true">Continue</button>
+						<a href="/admin/addgame">Add Game</a>
+					</div>
 				</div>
 				<div class="eventScoreBoard">
 					<div class="playerCard">
@@ -68,5 +74,4 @@
 		</div>
 	</body>
 	<script src="/js/all.js?p=overlay" type="text/javascript"></script>
-	<link href="/css/all.css?p=overlay" rel="stylesheet">
 </html>

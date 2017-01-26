@@ -44,10 +44,15 @@ body
 
 .eventName
 {
-	font-weight:1900;
+	font-weight:190%;
 	background:blue;
 	border: 1px solid darkblue;
 	padding:5px 10px 5px 10px;
+}
+
+.controls
+{
+	display:none;
 }
 
 .scoreBoard
@@ -67,6 +72,11 @@ body
 {
 	background:blue;
 	padding:4px 2px 4px 10px;
+}
+
+.maxwell a
+{
+	color:white;
 }
 
 .sports
@@ -105,6 +115,19 @@ body
 	width: 49%;
 	float: left;
 	padding-bottom: 20px;
+}
+
+.playerCard
+{
+	padding-left: 5px;
+	padding-top: 5px;
+}
+
+.playerCard .profileName,
+.playerCard .profileImage,
+.playerCard .countryName
+{
+	text-align : center;
 }
 
 .event
@@ -214,3 +237,123 @@ body
 	z-index: -9999;
 }
 
+@media screen and (min-width:200px) and (max-width:425px) {
+
+	body
+	{
+		background:none;
+	}
+
+	#canvas,
+	.eventsList,
+	.news h1,
+	.vsList,
+	.ultimate,
+	.dateContainer,
+	.playerCard
+	{
+		display:none;
+	}
+
+	.rightSide
+	{
+		width: 100%;
+		margin: 0px;
+		float: left;
+	}
+
+	.eventScoreBoard
+	{
+		width: 100%;
+		border: 0;
+		border-radius: 0;
+	}
+	
+
+	.eventScoreBoard:first-child
+	{
+		height:60px;
+		padding:0;
+		text-align: center;
+	}
+
+	.maxwellSports
+	{
+    width: 100%;
+    float: left;
+	}
+
+.maxwell
+{
+width: 50%;
+    height: 70px;
+    float: left;
+    padding: 0;
+}
+
+.sports
+{
+    width: 50%;
+    float: right;
+    padding: 0px;
+    height: 70px;
+}
+
+.maxwell a,
+.sports
+{
+	color:white;
+font-size:160%;
+}
+
+.updating
+{
+    display: block;
+    position: absolute;
+	top: 50px;
+	left: 184px;
+}
+
+
+.scoreBoard td,
+.eventName
+{
+	font-size:150%;
+}
+
+.news span
+{
+	padding-left: 0px;
+}
+
+.controls
+{
+	display:block;
+}
+
+.controls a,
+.controls button
+{
+align-items: flex-start;
+background-color: crimson;
+border: 0px outset buttonface;
+box-sizing: border-box;
+color: buttontext;
+cursor: default;
+display: inline-block;
+font: 160% Arial;
+letter-spacing: normal;
+margin: 2% 0em 0em 0em;
+padding: 2px 6px 3px;
+text-align: center;
+text-decoration: none;
+text-indent: 0px;
+text-rendering: auto;
+text-shadow: none;
+text-transform: none;
+word-spacing: normal;
+width:100%;
+height: 60px;
+}
+
+}

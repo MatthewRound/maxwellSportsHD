@@ -42,9 +42,12 @@ app.service('EventService', function()
 			});
 	};
 
-	this.randomise = function($scope) 
+	this.randomise = function($scope, index) 
 	{
-		var eventIndex = Math.floor(Math.random() * (events.length - 0 )) + 0;
+		var eventIndex = index;
+		if (index === undefined) {
+			eventIndex = Math.floor(Math.random() * (events.length - 0 )) + 0;
+		}
 		$scope.currentEvent = $scope.events[eventIndex];
 		var playerIndex = Math.floor(Math.random() * ($scope.currentEvent.scores.length - 0 )) + 0;
 		$scope.currentPlayer = $scope.currentEvent.scores[playerIndex];

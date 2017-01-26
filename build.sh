@@ -4,7 +4,6 @@ if [[ -f ~/projects/golang ]]; then
 fi
 
 cd src
-
 export GOPATH=~/projects/golang
 go get golang.org/x/net/websocket
 go build app.go

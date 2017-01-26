@@ -124,6 +124,7 @@ func adminHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+
 func addgameHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "POST" {
 	} else {
@@ -153,6 +154,7 @@ func echoHandler(ws *websocket.Conn) {
 	}
 }
 
+
 func sendToClients(s string) {
 	for key := range connections{
 		_, err :=	connections[key].Write([]byte(s))
@@ -175,6 +177,7 @@ func adminInfoHandler (w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "{\"clientCount\" : %d}", len(connections))
 }
 
+
 func main() {
 	http.HandleFunc("/", handler)
 	http.HandleFunc("/admin", adminHandler)
@@ -185,5 +188,5 @@ func main() {
 	http.HandleFunc("/images/", imageHandler)
 	http.HandleFunc("/relay", relay)
 	http.Handle("/ws", websocket.Handler(echoHandler))
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(":10080", nil)
 }

@@ -2,7 +2,9 @@ app.service('PlayerService', function()
 {
 	this.calculateWinPercentage = function(player) 
 	{
-		return (Math.round((player.wins / player.played) * 100) /100)*100;
+		var num = ((Math.round((player.wins / player.played) * 100) /100)*100);
+		num= +num.toFixed(2);
+		return num;
 	};
 
 	this.mergePlayers = function($scope) 

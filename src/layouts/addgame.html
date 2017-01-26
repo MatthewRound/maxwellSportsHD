@@ -8,29 +8,38 @@
 	</head>
 	<body data-ng-app="app">
 		<div data-ng-controller="addgame" data-ng-init="init()">
-			<div>
-				<p>Event:<span data-ng-bind="currentEvent.name"></span></p>
-				<p>Winner:<span data-ng-bind="winner.name"></span></p>
-				<ul>
-					<li ng-repeat="player in players" ng-show="player.participating">
-					<span ng-bind="player.name"></span>
-					<input name="winner" type="radio" ng-model="winner.name" ng-value="player.name" />
-					</li>
-				</ul>
-				<button class="saveButton" type="button" data-ng-click="save()">save</button>
-			</div>
+			<!-- choose event -->
+			<h2>Event</h2>
 			<ul>
+				<li class="event" data-ng-repeat="(key, event) in events">
+					<input name="event" type="radio" ng-model="currentEvent.name" ng-value="event.name" />
+					<span ng-bind="event.name"></span>
+				</li>
+			</ul>
+			<!-- choose players -->
+			<h2 ng-show="currentEvent.name.length >=1">Participants</h2>
+			<ul ng-show="currentEvent.name.length >=1">
 				<li data-ng-repeat="player in players">
 					<input type="checkbox" ng-model="player.participating" />
 					<span data-ng-bind="player.name"><span></td>
 				</li>
 			</ul>
-			<ul>
-				<li class="event" data-ng-repeat="(key, event) in events">
-					<span ng-bind="event.name"></span>
-					<input name="event" type="radio" ng-model="currentEvent.name" ng-value="event.name" />
+			<!-- choose winner -->
+			<h2 ng-show="currentEvent.name.length >=1">Winner</h2>
+			<ul ng-show="currentEvent.name.length >=1">
+				<li ng-repeat="player in players" ng-show="player.participating">
+					<input name="winner" type="radio" ng-model="winner.name" ng-value="player.name" />
+					<span ng-bind="player.name"></span>
 				</li>
 			</ul>
+			<!-- summary -->
+			<div ng-show="currentEvent.name.length>=1 && winner.name.length >=1">
+				<h2>Summary</h2>
+				<h3 ng-show="currentEvent.name.length >=1">Event:<span data-ng-bind="currentEvent.name"></span></h3>
+				<h3 ng-show="winner.name.length >=1">Winner:<span data-ng-bind="winner.name"></span></h3>
+				<button class="saveButton" type="button" data-ng-click="save()" ng-show="!addAnother">Save</button>
+				<button class="saveButton" type="button" data-ng-click="reset()" ng-show="addAnother">Add Another</button>
+			</div>
 		</div>
 	</body>
 	<script src="/js/all.js?p=addgame" type="text/javascript"></script>

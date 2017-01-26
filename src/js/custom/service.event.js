@@ -8,28 +8,26 @@ app.service('EventService', function()
 		angular.forEach($scope.players, function(player, key){
 			if (player.participating !== undefined) {
 				players.push(player.name);
+				$scope.players[key].participating = false;
 			}
 		});
-console.log('src/js/custom/service.event.js(+13 19-31),scope.events');console.log($scope.events);
 		angular.forEach($scope.events, function(eventValue, eventKey){
 			if (eventValue.name == currentEvent) {
 				angular.forEach(eventValue.scores, function(player, scoresKey){
 					angular.forEach(players, function(p, K){
 						if (p == player.name) {
-							player.played = player.played +1;
+							$scope.events[eventKey]['scores'][scoresKey].played = player.played +1;
 							if (player.name == winner) {
-								player.wins = player.wins+1;
+								$scope.events[eventKey]['scores'][scoresKey].wins = player.wins +1;
 							} else {
-								player.loses = player.loses +1;
+								$scope.events[eventKey]['scores'][scoresKey].loses = player.loses +1;
 							}
 						}
 					});
 				});
 			}
 		});
-console.log('src/js/custom/service.event.js(+13 19-31),scope.events');console.log($scope.events);
-return;
-/* 		this.save($scope, $http); */
+ 		this.save($scope, $http); 
 	}
 
 	this.save = function($scope, $http)

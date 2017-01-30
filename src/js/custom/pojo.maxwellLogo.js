@@ -57,7 +57,6 @@ var maxwellLogo =
 	},
 	drawLogo:function(x, y) 
 	{
-		//draw background box blue
 		var width = (this.canvasSize.w / 10) *4;
 		var width = 200;
 		var height = 55;
@@ -66,14 +65,14 @@ var maxwellLogo =
 		this.pen.fillRect(x, y, width, height);
 		this.pen.fillStyle="#ffffff";
 		this.pen.font="30px Verdana";
-		this.pen.fillText('MAXWELL', x+(width/10), y+(height /1.5));
+		this.pen.fillText('MAXWELL', x+((width/10)*1.5), y+(height /1.5));
 		var redx = x + width;
 		var redy = y;
 		this.pen.moveTo(redx, redy);
 		this.pen.fillStyle="#ff0000";
 		this.pen.fillRect(redx, redy, width, height);
 		this.pen.fillStyle="#ffffff";
-		this.pen.fillText('SPORTS HD', redx+(width/10), redy+(height /1.5));
+		this.pen.fillText('SPORTS HD', redx+((width/10)/2), redy+(height /1.5));
 		this.currentBox.w = width + (this.canvasSize.w /10) *4;
 		this.currentBox.h = height;
 	}
